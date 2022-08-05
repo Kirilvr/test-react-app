@@ -4,6 +4,7 @@ import {
   useSearchUsersQuery,
 } from '../store/github/github.api';
 import { useDebounce } from '../hooks/debounce';
+import { RepoCard } from '../components/RepoCard';
 
 interface IHomePage {}
 
@@ -25,6 +26,7 @@ export const HomePage = ({}: IHomePage) => {
 
   const clickHandler = (username: string) => {
     fetchRepos(username);
+    setDropdown(false);
   };
 
   return (
@@ -59,7 +61,7 @@ export const HomePage = ({}: IHomePage) => {
             <p className="text-center">Repos are loading...</p>
           )}
           {repos?.map((repo) => (
-            <p key={repo.id}>{repo.url}</p>
+            <RepoCard repo={repo} key={repo.id} />
           ))}
         </div>
       </div>
